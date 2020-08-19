@@ -56,4 +56,5 @@ deploy:
   overwrite: true
   target_commitish: $TRAVIS_COMMIT
   on:
-    branch: gl4es
+    [push]
+  # branch: gl4es
