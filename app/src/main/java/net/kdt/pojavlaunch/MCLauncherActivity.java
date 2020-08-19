@@ -785,7 +785,7 @@ public class MCLauncherActivity extends AppCompatActivity
 						});
 					proc.initInputStream(MCLauncherActivity.this);
 					
-					boolean useDalvikvm = true;
+					boolean useDalvikvm = Build.VERSION.SDK_INT < 24;
 					proc.writeToProcess("export CLASSPATH=" + getApplicationInfo().sourceDir);
 					if (useDalvikvm) {
 						proc.writeToProcess(
