@@ -136,6 +136,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 		setContentView(R.layout.main);
 
 		try {
+			Tools.runtimeClearGrowthLimit();
+			
 			final View decorView = getWindow().getDecorView();
 			decorView.setOnSystemUiVisibilityChangeListener (new View.OnSystemUiVisibilityChangeListener() {
 				@Override

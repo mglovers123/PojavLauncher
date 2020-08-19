@@ -67,6 +67,13 @@ public final class Tools
 		"1.9"
 	};
 
+	public static void runtimeClearGrowthLimit() throws Throwable {
+		// dalvik.system.VMRuntime.getRuntime().clearGrowthLimit();
+		Class rtClass = Class.forName("dalvik.system.VMRuntime");
+		Object vmRuntime = rtClass.getMethod("getRuntime").invoke(null);
+		rtClass.getMethod("clearGrowthLimit").invoke(vmRuntime);
+	}
+	
 	public static String artifactToPath(String group, String artifact, String version) {
 		return group.replaceAll("\\.", "/") + "/" + artifact + "/" + version + "/" + artifact + "-" + version + ".jar";
 	}

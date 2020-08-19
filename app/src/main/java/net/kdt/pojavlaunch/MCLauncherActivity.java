@@ -774,6 +774,36 @@ public class MCLauncherActivity extends AppCompatActivity
 					 jvmArgs.add("-Xms128M");
 					 jvmArgs.add("-Xmx1G");
 					 */
+					 
+					
+					new Thread(new Runnable(){
+
+							@Override
+							public void run() {
+								try {
+									ShellProcessOperation proc = new ShellProcessOperation(new ShellProcessOperation.OnPrintListener(){
+											@Override
+											public void onPrintLine(String text) {
+												System.out.println(text);
+											}
+										});
+									proc.initInputStream(MCLauncherActivity.this);
+									proc.writeToProcess("export base=/system");
+									proc.writeToProcess("export CLASSPATH=" + getPackageCodePath());
+									proc.writeToProcess(
+										"exec app_process -Xmx512m $base/bin " +
+										getPackageName() + ".MainActivityLauncher "
+									// getPackageName() + "/.MainActivity "
+									);
+									proc.waitFor();
+								} catch (Throwable th) {
+									Tools.showError(MCLauncherActivity.this, th);
+								}
+							}
+						}).start();
+					
+					// TODO 'am' start Activity in freeform mode
+				/*
 					Intent mainIntent = new Intent(MCLauncherActivity.this, MainActivity.class);
 					// mainIntent.addFlags(Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT);
 					mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
@@ -789,6 +819,7 @@ public class MCLauncherActivity extends AppCompatActivity
 					} else {
 						startActivity(mainIntent);
 					}
+				*/
 				}
 				catch (Throwable e) {
 					Tools.showError(MCLauncherActivity.this, e);

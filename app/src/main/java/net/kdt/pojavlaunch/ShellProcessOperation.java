@@ -20,7 +20,15 @@ public class ShellProcessOperation
 		); //"/system/bin/sh -c \"" + command + "\"");
 	}
 	
-	public void writeToProcess(String cmd) throws IOException {
+	public void writeToProcess(final String cmd) throws IOException {
+		new Thread(new Runnable(){
+
+				@Override
+				public void run()
+				{
+					listener.onPrintLine("> " + cmd + "\n");
+				}
+		});
 		DataOutputStream os = new DataOutputStream(process.getOutputStream());
 		os.writeBytes(cmd + "\n");
 		os.flush();
