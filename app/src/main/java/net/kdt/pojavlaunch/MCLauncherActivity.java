@@ -775,32 +775,23 @@ public class MCLauncherActivity extends AppCompatActivity
 					 jvmArgs.add("-Xmx1G");
 					 */
 					 
-					
-					new Thread(new Runnable(){
 
+					System.out.println("Begin start MainActivity");
+					ShellProcessOperation proc = new ShellProcessOperation(new ShellProcessOperation.OnPrintListener(){
 							@Override
-							public void run() {
-								try {
-									ShellProcessOperation proc = new ShellProcessOperation(new ShellProcessOperation.OnPrintListener(){
-											@Override
-											public void onPrintLine(String text) {
-												System.out.println(text);
-											}
-										});
-									proc.initInputStream(MCLauncherActivity.this);
-									proc.writeToProcess("export base=/system");
-									proc.writeToProcess("export CLASSPATH=" + getPackageCodePath());
-									proc.writeToProcess(
-										"exec app_process -Xmx512m $base/bin " +
-										getPackageName() + ".MainActivityLauncher "
-									// getPackageName() + "/.MainActivity "
-									);
-									proc.waitFor();
-								} catch (Throwable th) {
-									Tools.showError(MCLauncherActivity.this, th);
-								}
+							public void onPrintLine(String text) {
+								System.out.println(text);
 							}
-						}).start();
+						});
+					proc.initInputStream(MCLauncherActivity.this);
+					proc.writeToProcess("export base=/system");
+					proc.writeToProcess("export CLASSPATH=" + getApplicationInfo().sourceDir);
+					proc.writeToProcess(
+						"app_process32 -Xmx768m $base/bin " +
+						getPackageName() + ".MainActivityLauncher " +
+						getPackageName() + "/.MainActivity "
+					);
+					// proc.waitFor();
 					
 					// TODO 'am' start Activity in freeform mode
 				/*

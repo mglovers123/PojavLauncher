@@ -1,6 +1,7 @@
 package net.kdt.pojavlaunch;
 
 import dalvik.system.*;
+import java.lang.reflect.*;
 
 public class MainActivityLauncher
 {
@@ -14,9 +15,9 @@ public class MainActivityLauncher
 		String amArgs = "start --user 0 " + args[0];
 		System.out.println("Executing ActivityManager arguments: " + amArgs);
 		DexClassLoader loader = new DexClassLoader("/system/framework/am.jar", "" /* args[1] */, "" /* System.getProperty("java.library.path") */ , MainActivityLauncher.class.getClassLoader());
-		loader.loadClass("com.android.command.am.Am")
-			.getMethod("main", String[].class)
-			.invoke(null, amArgs.split(" "));
+		Class cls = loader.loadClass("com.android.commands.am.Am");
+		Method method = cls.getMethod("main", String[].class);
+		method.invoke(null, new Object[]{amArgs.split(" ")});
 	}
 }
 
