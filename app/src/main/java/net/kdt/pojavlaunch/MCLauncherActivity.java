@@ -787,7 +787,7 @@ public class MCLauncherActivity extends AppCompatActivity
 					proc.writeToProcess("export base=/system");
 					proc.writeToProcess("export CLASSPATH=" + getApplicationInfo().sourceDir);
 					proc.writeToProcess(
-						"app_process32 -Xmx768m $base/bin " +
+						"app_process32 -Xms768m -Xmx768m $base/bin " +
 						getPackageName() + ".MainActivityLauncher " +
 						getPackageName() + "/.MainActivity "
 					);

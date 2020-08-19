@@ -12,6 +12,8 @@ public class MainActivityLauncher
 	 * - Native search path
 	 */
 	public static void main(String[] args) throws Throwable {
+		System.out.println("Max memory = " + Long.toString(Runtime.getRuntime().maxMemory() / 1024l / 1024l) + "MB");
+		
 		String amArgs = "start --user 0 " + args[0];
 		System.out.println("Executing ActivityManager arguments: " + amArgs);
 		DexClassLoader loader = new DexClassLoader("/system/framework/am.jar", "" /* args[1] */, "" /* System.getProperty("java.library.path") */ , MainActivityLauncher.class.getClassLoader());
