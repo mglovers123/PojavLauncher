@@ -784,13 +784,24 @@ public class MCLauncherActivity extends AppCompatActivity
 							}
 						});
 					proc.initInputStream(MCLauncherActivity.this);
-					proc.writeToProcess("export base=/system");
+					
+					boolean useDalvikvm = true;
 					proc.writeToProcess("export CLASSPATH=" + getApplicationInfo().sourceDir);
-					proc.writeToProcess(
-						"app_process32 -Xms768m -Xmx768m $base/bin " +
-						getPackageName() + ".MainActivityLauncher " +
-						getPackageName() + "/.MainActivity "
-					);
+					if (useDalvikvm) {
+						proc.writeToProcess(
+							"dalvikvm -Xms768m -Xmx768m -cp $CLASSPATH com.android.internal.util.WithFramework " +
+							getPackageName() + ".MainActivityLauncher " +
+							getPackageName() + "/.MainActivity "
+						);
+					} else { // use app_process
+						proc.writeToProcess("export base=/system");
+						proc.writeToProcess(
+							"app_process32 -Xms768m -Xmx768m $base/bin " +
+							getPackageName() + ".MainActivityLauncher " +
+							getPackageName() + "/.MainActivity "
+						);
+					}
+					
 					// proc.waitFor();
 					
 					// TODO 'am' start Activity in freeform mode
