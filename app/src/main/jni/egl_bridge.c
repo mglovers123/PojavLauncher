@@ -15,6 +15,8 @@
 #include <android/native_window.h>
 #include <android/native_window_jni.h>
 
+#include "utils.h"
+
 struct PotatoBridge {
 	ANativeWindow* androidWindow;
 	
@@ -151,6 +153,8 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_GLFW_nativeEglMakeCurrent(JNIEnv*
 	eglSwapBuffers(potatoBridge.eglDisplay, potatoBridge.eglSurface);
 	printf("First frame error: %p\n", eglGetError());
 #endif
+
+    isEglMakeCurrentCalled = 1;
 
 	return success == EGL_TRUE ? JNI_TRUE : JNI_FALSE;
 }
