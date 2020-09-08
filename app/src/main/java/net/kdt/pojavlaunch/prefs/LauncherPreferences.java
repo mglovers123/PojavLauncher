@@ -37,7 +37,10 @@ public class LauncherPreferences
 			"-XX:G1NewSizePercent=20 " +
 			"-XX:G1ReservePercent=20 " +
 			"-XX:MaxGCPauseMillis=50 " +
-			"-XX:G1HeapRegionSize=32M"
+			"-XX:G1HeapRegionSize=32M" +
+            "-XX:+UseFastAccessorMethods" +
+            "-XX:+OptimizeStringConcat" +
+            "-XX:+AggressiveOpts"
 		);
 	}
 }

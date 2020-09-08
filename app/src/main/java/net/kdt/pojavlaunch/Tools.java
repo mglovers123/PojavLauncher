@@ -82,20 +82,8 @@ public final class Tools
 	*/
 		javaArgList.add(Tools.homeJreDir + "/bin/java");
 	
-	  //      javaArgList.add("-Xms900m");
-		javaArgList.add("-Xmx950m");
-		
-		javaArgList.add("-XX:+UseG1GC");
-		javaArgList.add("-Dsun.rmi.dgc.server.gcInterval=2147483646");
-		javaArgList.add("-XX:+UnlockExperimentalVMOptions");
-		javaArgList.add("-XX:G1NewSizePercent=20");
-		javaArgList.add("-XX:G1ReservePercent=20");
-		javaArgList.add("-XX:MaxGCPauseMillis=50");
-		javaArgList.add("-XX:G1HeapRegionSize=32M");
-		javaArgList.add("-XX:+UseFastAccessorMethods");
-		javaArgList.add("-XX:+OptimizeStringConcat");
-		javaArgList.add("-XX:+AggressiveOpts");
-		
+	  //javaArgList.add("-Xms512m");
+		javaArgList.add("-Xmx512m");	
 		
 		javaArgList.add("-Djava.home=" + Tools.homeJreDir);
 		javaArgList.add("-Djava.io.tmpdir=" + ctx.getCacheDir().getAbsolutePath());
