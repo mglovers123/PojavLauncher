@@ -83,7 +83,7 @@ public final class Tools
 		javaArgList.add(Tools.homeJreDir + "/bin/java");
 	
 	  //      javaArgList.add("-Xms900m");
-		javaArgList.add("-Xmx900m");
+		javaArgList.add("-Xmx1G");
 		
 		javaArgList.add("-XX:+UseG1GC");
 		javaArgList.add("-Dsun.rmi.dgc.server.gcInterval=2147483646");
